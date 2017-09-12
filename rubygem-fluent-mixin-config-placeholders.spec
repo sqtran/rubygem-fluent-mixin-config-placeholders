@@ -1,6 +1,5 @@
 # Generated from fluent-mixin-config-placeholders-0.4.0.gem by gem2rpm -*- rpm-spec -*-
 %global gem_name fluent-mixin-config-placeholders
-
 Name: rubygem-%{gem_name}
 Version: 0.4.0
 Release: 1%{?dist}
@@ -12,7 +11,13 @@ BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
 # BuildRequires: rubygem(test-unit)
+Requires: fluentd
+Requires: uuidtools
 BuildArch: noarch
+
+%if 0%{?rhel} > 0
+Provides: rubygem(%{gem_name}) = ${version}
+%endif
 
 %description
 to add various placeholders for plugin configurations.
@@ -51,6 +56,7 @@ cp -a .%{gem_dir}/* \
 %check
 pushd .%{gem_instdir}
 # ruby -e 'Dir.glob "./test/**/*_test.rb", &method(:require)'
+rake test
 popd
 
 %files
