@@ -11,12 +11,15 @@ BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
 # BuildRequires: rubygem(test-unit)
+BuildRequires: rubygem(bundler)
+BuildRequires: rubygem(rake)
+BuildRequires: rubygem(test-unit)
+BuildRequires: rubygem(uuidtools)
 Requires: fluentd
-Requires: uuidtools
 BuildArch: noarch
 
 %if 0%{?rhel} > 0
-Provides: rubygem(%{gem_name}) = ${version}
+Provides: rubygem(%{gem_name}) = %{version}
 %endif
 
 %description
@@ -77,5 +80,5 @@ popd
 %{gem_instdir}/test
 
 %changelog
-* Tue Sep 12 2017 stran <steveqtran@gmail.com> - 0.4.0-1
+* Wed Sep 13 2017 stran <steveqtran@gmail.com> - 0.4.0-1
 - Initial package

@@ -24,14 +24,17 @@ BuildRequires: gcc
 <%= development_dependencies.reject do |d|
   ["rdoc", "rake", "bundler"].include? d.name
 end.virtualize.with_requires.comment_out.to_rpm -%>
+BuildRequires: rubygem(bundler)
+BuildRequires: rubygem(rake)
+BuildRequires: rubygem(test-unit)
+BuildRequires: rubygem(uuidtools)
 Requires: fluentd
-Requires: uuidtools
 <% if spec.extensions.empty? -%>
 BuildArch: noarch
 <% end -%>
 
 %if 0%{?rhel} > 0
-Provides: rubygem(%{gem_name}) = ${version}
+Provides: rubygem(%{gem_name}) = %{version}
 %endif
 
 %description
